@@ -3,7 +3,6 @@
 
     window.$ = nut;
 
-    var appUid = "5fb12e6a";
     var seed = +atob(window.location.hash.substr(1));
 
     if (seed.toString() === "NaN" || window.location.hash.substr(1) === "") {
@@ -11,6 +10,8 @@
         seed = Math.floor(1048576 * Math.random());
         window.location.hash = btoa("" + seed);
     }
+
+    var appUid = "5fb12e6a-36q-" + seed;
 
     var deck = [
         {set: 1, text: 'Given the choice of anyone in the world, whom would you want as a dinner guest?'},
