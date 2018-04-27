@@ -21,7 +21,7 @@ body {
   min-height: 18em;
 }
 
-#card .text { font-size: 1.2em; }
+#card .text { font-size: 1.1em; }
 #card.set1 { background-color: rgba(255, 200, 87, 0.1); }
 #card.set2 { background-color: rgba(255, 200, 87, 0.2); }
 #card.set3 { background-color: rgba(255, 200, 87, 0.4); }
@@ -40,7 +40,7 @@ button {
   border: 2px solid #000;
   border-radius: 1em;
   background-color: #fff;
-  padding: 0.4em 1.6em;
+  padding: 0.3em 1.6em;
 }
 
 button:hover {
@@ -51,13 +51,10 @@ button:hover {
 #prev { float: left; }
 #next { float: right; }
 
-@media only screen and (max-width: 400px) {
-  body  { width: calc(100% - 1em); margin: 0.5em; font-size: 20px; }
-  #card { width: 13em; height: calc(100% - 8em); margin: 1.5em auto; }
-  #card .text {
-    font-size: 1.1em; overflow: scroll;
-    height: calc(100% - 2em);
-  }
+@media only screen and (max-width: 600px) {
+  body  { width: calc(100% - 1em); margin: 0.5em auto; font-size: 20px; }
+  #card { height: 80%; margin: 0 auto 0.5em auto; overflow: scroll; }
+  .row  { height: calc(20% - 0.5em); }
 }
   </style>
 </head>
@@ -66,8 +63,10 @@ button:hover {
     <div class='info'>#<span class='num'></span> <span class='right' title=''>Set <span class='set'>1</span></span></div>
     <div class='text'></div>
   </div>
-  <button id='prev'>Prev</button>
-  <button id='next'>Next</button>
+  <div class='row'>
+    <button id='prev'>Prev</button>
+    <button id='next'>Next</button>
+  </div>
   <script src='build.js'></script>
 </body>
 </html>
