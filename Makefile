@@ -1,5 +1,5 @@
 dev:
-	cat lib/*.js app.js > build.js
+	cat lib/*.js deck.js app.js > build.js
 
 dist: dev
 	uglifyjs --mangle --compress -- build.js > docs/build.js
