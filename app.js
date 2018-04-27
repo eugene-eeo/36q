@@ -4,15 +4,13 @@
     window.$ = nut;
 
     var seed = +atob(window.location.hash.substr(1));
-
     if (seed.toString() === "NaN" || window.location.hash.substr(1) === "") {
         // 2^10 possible states should keep everyone busy
         seed = Math.floor(1048576 * Math.random());
         window.location.hash = btoa("" + seed);
     }
 
-    var appUid = "5fb12e6a-36q-" + seed;
-
+    var storageKey = "5fb12e6a-36q-" + seed;
     var deck = [
         {set: 1, text: 'Given the choice of anyone in the world, whom would you want as a dinner guest?'},
         {set: 1, text: 'Would you like to be famous? In what way?'},
@@ -56,11 +54,11 @@
     shuffle(deck, xor128(seed));
 
     function getPointer() {
-        var pointer = +window.localStorage.getItem(appUid);
+        var pointer = +window.localStorage.getItem(storageKey);
         if (pointer > 0 && pointer.toString() !== "NaN") {
             return pointer;
         }
-        window.localStorage.setItem(appUid, 0);
+        window.localStorage.setItem(storageKey, 0);
         return 0;
     }
 
@@ -70,13 +68,6 @@
         2: 'About dreams and relationships. Might escalate and be quite emotional. It’s your choice what to talk about and what to not.',
         3: 'D E E P',
     };
-
-    evee.on(document, 'keydown', function(ev) {
-        switch (ev.keyCode) {
-            case 37: prev(); ev.preventDefault(); break;
-            case 39: next(); ev.preventDefault(); break;
-        }
-    });
 
     function prev() {
         if (pointer > 0) {
@@ -91,6 +82,13 @@
             updateUI(pointer);
         }
     }
+
+    evee.on(document, 'keydown', function(ev) {
+        switch (ev.keyCode) {
+            case 37: prev(); ev.preventDefault(); break;
+            case 39: next(); ev.preventDefault(); break;
+        }
+    });
 
     evee.on($.el('#prev'), 'click', prev);
     evee.on($.el('#next'), 'click', next);
@@ -109,7 +107,7 @@
         classList.toggle('set2', card.set === 2);
         classList.toggle('set3', card.set === 3);
 
-        window.localStorage.setItem(appUid, pointer);
+        window.localStorage.setItem(storageKey, pointer);
     }
 
     updateUI(pointer);
