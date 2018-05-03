@@ -24,11 +24,6 @@
     }
 
     var pointer = getPointer();
-    var setDescriptions = {
-        1: 'Half deep questions, but not too personal.',
-        2: 'About dreams and relationships. Might escalate and be quite emotional. It’s your choice what to talk about and what to not.',
-        3: 'D E E P',
-    };
 
     function prev() {
         if (pointer > 0) {
@@ -61,7 +56,6 @@
         $.el('.num',  elem).textContent = ptr + 1;
         $.el('.text', elem).textContent = card.text;
         $.el('.set',  elem).textContent = card.set;
-        $.el('.right', elem).setAttribute('title', setDescriptions[card.set]);
 
         var classList = elem.classList;
         classList.toggle('set1', card.set === 1);
