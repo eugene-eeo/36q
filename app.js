@@ -11,8 +11,14 @@
     }
 
     var storageKey = "5fb12e6a-36q-" + seed;
-    var deck = window.DECK;
-    shuffle(deck, xor128(seed));
+    var rng = xor128(seed);
+    var deck = [];
+    window.DECK_DATA.forEach(function(array, i) {
+        shuffle(array, rng);
+        deck = deck.concat(array.map(function(text) {
+            return {set: i+1, text: text};
+        }));
+    });
 
     function getPointer() {
         var pointer = +window.localStorage.getItem(storageKey);
